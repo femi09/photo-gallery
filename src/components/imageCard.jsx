@@ -1,6 +1,9 @@
 import React from "react";
 
 const ImageCard = ({ photo }) => {
+  // converting array of objects into array of properties. so i can access the
+  // title properties of the tags array
+  const tags = photo.tags.map((obj) => obj.title);
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg">
       <img src={photo.urls.regular} alt="" className="w-full" />
@@ -10,11 +13,8 @@ const ImageCard = ({ photo }) => {
         </div>
         <ul>
           <li>
-            <strong>Views: </strong>
-            4000
-          </li>
-          <li>
-            <strong className='text-blue-300'>Description: {photo.description}</strong>
+            <strong className="text-blue-300">Description: </strong>
+            {photo.description}
           </li>
           <li>
             <strong>Likes: </strong>
@@ -23,15 +23,11 @@ const ImageCard = ({ photo }) => {
         </ul>
       </div>
       <div className="px-6 py-4">
-        <span className="inline-block bg-gray-200 rounded-4 px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-          #tag1
-        </span>
-        <span className="inline-block bg-gray-200 rounded-4 px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-          #tag2
-        </span>
-        <span className="inline-block bg-gray-200 rounded-4 px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-          #tag3
-        </span>
+        {tags.map((tag) => (
+          <span className="inline-block bg-gray-200 rounded-4 px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+            {tag}
+          </span>
+        ))}
       </div>
     </div>
   );
