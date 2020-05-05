@@ -11,7 +11,7 @@ class App extends Component {
   };
   async componentDidMount() {
     const { data } = await axios.get(
-      "https://api.unsplash.com/search/photos?query=office&client_id=i-MziJcxj3BaybCrXFeJNx4knOnS6c-93rnEoPFbHLA"
+      `https://api.unsplash.com/search/photos?query=lagos&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`
     );
     const photos = data.results;
     this.setState({ photos });
