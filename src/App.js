@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import ImageCard from "./components/imageCard";
 import ImageSearch from "./components/imageSearch";
+import NavBar from "./components/navBar";
 
 class App extends Component {
   state = {
@@ -14,8 +15,8 @@ class App extends Component {
     const { data } = await axios.get(
       "https://api.unsplash.com/search/photos?page=5-6&per_page=30&query=random&client_id=i-MziJcxj3BaybCrXFeJNx4knOnS6c-93rnEoPFbHLA"
     );
-    const photos = data.results
-    this.setState({ photos })
+    const photos = data.results;
+    this.setState({ photos });
   }
 
   handleSubmit = async (e) => {
@@ -37,18 +38,21 @@ class App extends Component {
   render() {
     const { photos } = this.state;
     return (
-      <div className="container mx-auto">
-        <ImageSearch
-          value={this.state.searchTerm}
-          onSubmit={this.handleSubmit}
-          onChange={this.handleChange}
-        />
-        <div className="grid grid-cols-3 gap-4">
-          {photos.map((photo) => (
-            <ImageCard key={photo.id} photo={photo} />
-          ))}
+      <React.Fragment>
+        <NavBar />
+        <div className="container mx-auto">
+          <ImageSearch
+            value={this.state.searchTerm}
+            onSubmit={this.handleSubmit}
+            onChange={this.handleChange}
+          />
+          <div className="grid grid-cols-3 gap-4">
+            {photos.map((photo) => (
+              <ImageCard key={photo.id} photo={photo} />
+            ))}
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
