@@ -12,17 +12,17 @@ class App extends Component {
 
   async componentDidMount() {
     const { data } = await axios.get(
-      "https://api.unsplash.com/search/photos?query=random&client_id=i-MziJcxj3BaybCrXFeJNx4knOnS6c-93rnEoPFbHLA"
+      "https://api.unsplash.com/search/photos?page=5-6&per_page=30&query=random&client_id=i-MziJcxj3BaybCrXFeJNx4knOnS6c-93rnEoPFbHLA"
     );
     const photos = data.results
-    this.setState({photos})
+    this.setState({ photos })
   }
 
   handleSubmit = async (e) => {
     e.preventDefault();
     const { searchTerm } = this.state;
     const { data } = await axios.get(
-      `https://api.unsplash.com/search/photos?query=${searchTerm}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`
+      `https://api.unsplash.com/search/photos?page=5&per_page=30&query=${searchTerm}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`
     );
     const photos = data.results;
     this.setState({ photos });
