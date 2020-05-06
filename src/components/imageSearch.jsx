@@ -1,6 +1,6 @@
 import React from "react";
 
-const ImageSearch = ({onSubmit, value, onChange}) => {
+const ImageSearch = ({onSubmit, onChange}) => {
   return (
     <div className="max-w-sm overflow-hidden my-10 mx-auto">
       <form onSubmit={onSubmit} className="w-full max-w-sm">
