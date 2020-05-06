@@ -3,6 +3,7 @@ import axios from "axios";
 import ImageCard from "./components/imageCard";
 import ImageSearch from "./components/imageSearch";
 import NavBar from "./components/navBar";
+import NotFound from "./components/notFound";
 
 class App extends Component {
   state = {
@@ -13,10 +14,11 @@ class App extends Component {
 
   async componentDidMount() {
     const { data } = await axios.get(
-      "https://api.unsplash.com/search/photos?page=5-6&per_page=30&query=random&client_id=i-MziJcxj3BaybCrXFeJNx4knOnS6c-93rnEoPFbHLA"
+      `https://api.unsplash.com/search/photos?page=3&per_page=30&query=random&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`
     );
     const photos = data.results;
-    this.setState({ photos });
+    const isLoading = false
+    this.setState({ photos, isLoading });
   }
 
   handleSubmit = async (e) => {
@@ -26,6 +28,7 @@ class App extends Component {
       `https://api.unsplash.com/search/photos?page=5&per_page=30&query=${searchTerm}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`
     );
     const photos = data.results;
+
     this.setState({ photos });
   };
 
@@ -36,7 +39,7 @@ class App extends Component {
   };
 
   render() {
-    const { photos } = this.state;
+    const { photos, isLoading } = this.state;
     return (
       <React.Fragment>
         <NavBar />
@@ -46,11 +49,18 @@ class App extends Component {
             onSubmit={this.handleSubmit}
             onChange={this.handleChange}
           />
-          <div className="grid grid-cols-3 gap-4">
-            {photos.map((photo) => (
-              <ImageCard key={photo.id} photo={photo} />
-            ))}
-          </div>
+          {!isLoading && photos.length === 0 && <NotFound photos={photos} />}
+          {isLoading ? (
+            <h1 className="text-6xl text-center mx-auto mt-32">
+              Photos Is Loading...
+            </h1>
+          ) : (
+            <div className="grid grid-cols-3 gap-4">
+              {photos.map((photo) => (
+                <ImageCard key={photo.id} photo={photo} />
+              ))}
+            </div>
+          )}
         </div>
       </React.Fragment>
     );
