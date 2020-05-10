@@ -5,7 +5,7 @@ import ImageSearch from './imageSearch';
 import NotFound from "./notFound";
 
 
-class ImageList extends Component {
+class Images extends Component {
   state = {
     photos: [],
     searchTerm: "",
@@ -59,4 +59,4 @@ class ImageList extends Component {
   }
 }
 
-export default ImageList;
+export default Images;
