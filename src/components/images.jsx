@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import ImageCard from './imageCard';
-import ImageSearch from './imageSearch';
+import http from "../services/httpService";
+import ImageCard from "./imageCard";
+import ImageSearch from "./imageSearch";
 import NotFound from "./notFound";
-
+import { unsplashApi, client_Id } from "../config.json";
 
 class Images extends Component {
   state = {
@@ -12,9 +13,10 @@ class Images extends Component {
     isLoading: true,
   };
 
+  
   async componentDidMount() {
-    const { data } = await axios.get(
-      `https://api.unsplash.com/search/photos?page=3&per_page=30&query=random&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`
+    const { data } = await http.get(
+      `${unsplashApi}?page=3&per_page=30&query=random&client_id=${client_Id}`
     );
     const photos = data.results;
     const isLoading = false;
@@ -24,8 +26,11 @@ class Images extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     const { searchTerm } = this.state;
-    const { data } = await axios.get(
-      `https://api.unsplash.com/search/photos?page=5&per_page=30&query=${searchTerm}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`
+    const {
+      data,
+    } = await http.get(
+      `${unsplashApi}?page=5&per_page=30&query=${searchTerm}`,
+      { headers: { Authorization: `Client-ID ${client_Id}` }}
     );
     const photos = data.results;
 
@@ -53,7 +58,6 @@ class Images extends Component {
             <ImageCard key={photo.id} photo={photo} />
           ))}
         </div>
-        }
       </div>
     );
   }

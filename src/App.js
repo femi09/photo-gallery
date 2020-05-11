@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavBar from "./components/navBar";
 import Images from "./components/images";
+import NavItems from './components/navItems';
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
       <React.Fragment>
         <NavBar />
         <Images />
+        
       </React.Fragment>
     );
   }
