@@ -1,9 +1,11 @@
 import React from "react";
+import NavItems from "./navItems";
 
-const NavBar = () => {
+const NavBar = ({ photos }) => {
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
+    <nav className="flex flex-col items-center
+     flex-wrap bg-teal-500 p-6">
+      <div className="flex items-center flex-shrink-0 text-white ">
         <svg
           className="fill-current h-8 w-8 mr-2"
           width="54"
@@ -15,6 +17,7 @@ const NavBar = () => {
         </svg>
         <span className="font-semibold text-xl tracking-tight">Spectrum</span>
       </div>
+      <NavItems />
     </nav>
   );
 };
