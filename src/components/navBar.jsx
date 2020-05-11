@@ -1,10 +1,8 @@
 import React from "react";
-import NavItems from "./navItems";
 
 const NavBar = ({ photos }) => {
   return (
-    <nav className="flex flex-col items-center
-     flex-wrap bg-teal-500 p-6">
+    <nav className="flex items-center flex-wrap bg-teal-500 p-6 mr-5">
       <div className="flex items-center flex-shrink-0 text-white ">
         <svg
           className="fill-current h-8 w-8 mr-2"
@@ -17,7 +15,6 @@ const NavBar = ({ photos }) => {
         </svg>
         <span className="font-semibold text-xl tracking-tight">Spectrum</span>
       </div>
-      <NavItems />
     </nav>
   );
 };
