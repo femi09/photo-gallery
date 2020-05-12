@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import http from "../services/httpService";
 import ImageCard from "./imageCard";
 import ImageSearch from "./imageSearch";
@@ -14,6 +13,7 @@ class Images extends Component {
     isLoading: true,
     photoTags: [
       "COVID-19",
+      "Work from Home",
       "Technology",
       "Business and Work",
       "Nature",
@@ -26,7 +26,14 @@ class Images extends Component {
       "Film",
       "Health and Wellness",
       "Fashion",
-    ],
+      "People",
+      "Experimental",
+      "History",
+      "Arts and Culture",
+      "Interiors",
+      "Textiles and Patterns",
+      "Current Events",
+    ]
   };
 
   async componentDidMount() {
@@ -58,24 +65,25 @@ class Images extends Component {
     this.setState({ searchTerm });
   };
 
-  handleTagClick= async (e) => {
-    const Tagname= e.target.innerText
-    const {data} = await http.get(
-      `${unsplashApi}?page=5&per_page=30&query=${Tagname}`,
-      { headers: { Authorization: `Client-ID ${client_Id}` } }
-    );
+  handleTagClick = async (e) => {
+    const Tagname = e.target.innerText;
+    const {
+      data,
+    } = await http.get(`${unsplashApi}?page=5&per_page=30&query=${Tagname}`, {
+      headers: { Authorization: `Client-ID ${client_Id}` },
+    });
     const photos = data.results;
-
     this.setState({ photos });
-
-
-  }
+  };
 
   render() {
     const { photos, isLoading, photoTags } = this.state;
     return (
       <React.Fragment>
-        <ImageTags photoTags={photoTags} onClick={this.handleTagClick}/>
+        <ImageTags
+          photoTags={photoTags}
+          onClick={this.handleTagClick}
+        />
         <div className="container mx-auto">
           <ImageSearch
             value={this.state.searchTerm}
