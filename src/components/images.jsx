@@ -11,6 +11,7 @@ class Images extends Component {
     photos: [],
     searchTerm: "",
     isLoading: true,
+    isActive: false,
     photoTags: [
       "COVID-19",
       "Work from Home",
@@ -33,7 +34,7 @@ class Images extends Component {
       "Interiors",
       "Textiles and Patterns",
       "Current Events",
-    ]
+    ],
   };
 
   async componentDidMount() {
@@ -55,7 +56,6 @@ class Images extends Component {
       { headers: { Authorization: `Client-ID ${client_Id}` } }
     );
     const photos = data.results;
-
     this.setState({ photos });
   };
 
@@ -67,23 +67,21 @@ class Images extends Component {
 
   handleTagClick = async (e) => {
     const Tagname = e.target.innerText;
-    const {
-      data,
-    } = await http.get(`${unsplashApi}?page=5&per_page=30&query=${Tagname}`, {
-      headers: { Authorization: `Client-ID ${client_Id}` },
-    });
+    const { data } = await http.get(
+      `${unsplashApi}?page=5&per_page=30&query=${Tagname}`,
+      {
+        headers: { Authorization: `Client-ID ${client_Id}` },
+      }
+    );
     const photos = data.results;
-    this.setState({ photos });
+    this.setState({ photos, isActive: true });
   };
 
   render() {
-    const { photos, isLoading, photoTags } = this.state;
+    const { photos, isLoading, photoTags, isActive } = this.state;
     return (
       <React.Fragment>
-        <ImageTags
-          photoTags={photoTags}
-          onClick={this.handleTagClick}
-        />
+        <ImageTags photoTags={photoTags} onClick={this.handleTagClick}  active={isActive}/>
         <div className="container mx-auto">
           <ImageSearch
             value={this.state.searchTerm}
