@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import HomePage from "./pages/homePage";
 import NavBar from "./components/navBar";
-import Images from "./components/images";
+import TagDetails from "./pages/tagDetails";
 import "./App.css";
 
 class App extends Component {
@@ -8,7 +10,10 @@ class App extends Component {
     return (
       <React.Fragment>
         <NavBar />
-        <Images />
+        <Switch>
+          <Route path="/t" component={TagDetails} />
+          <Route path="/" component={HomePage} />
+        </Switch>
       </React.Fragment>
     );
   }
