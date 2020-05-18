@@ -35,14 +35,14 @@ class HomePage extends Component {
     ],
   };
 
-  async componentDidMount() {
-    const { data } = await http.get(
-      `${unsplashApi}?page=7&per_page=30&query=random&client_id=${client_Id}`
-    );
-    const photos = data.results;
-    const isLoading = false;
-    this.setState({ photos, isLoading });
-  }
+  // async componentDidMount() {
+  //   const { data } = await http.get(
+  //     `${unsplashApi}?page=7&per_page=30&query=random&client_id=${client_Id}`
+  //   );
+  //   const photos = data.results;
+  //   const isLoading = false;
+  //   this.setState({ photos, isLoading });
+  // }
 
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,6 +65,7 @@ class HomePage extends Component {
 
   handleTagClick = async (e) => {
     const Tagname = e.target.innerText;
+    console.log(Tagname)
     const { data } = await http.get(
       `${unsplashApi}?page=5&per_page=30&query=${Tagname}`,
       {
@@ -73,14 +74,14 @@ class HomePage extends Component {
     );
 
     const photos = data.results;
-    this.setState({ photos, isActive: true });
+    this.setState({ photos });
   };
 
   render() {
     const { photos, isLoading, photoTags, searchTerm } = this.state;
     return (
       <div>
-        <ImageTags photoTags={photoTags} />
+        <ImageTags photoTags={photoTags} onClick={this.handleTagClick} />
         <ImageSearch
           value={searchTerm}
           onSubmit={this.handleSubmit}
@@ -89,7 +90,6 @@ class HomePage extends Component {
         <Images
           photos={photos}
           isLoading={isLoading}
-          onClick={this.handleTagClick}
           searchTerm={searchTerm}
         />
       </div>
