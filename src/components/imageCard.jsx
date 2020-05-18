@@ -6,7 +6,7 @@ const ImageCard = ({ photo }) => {
   const tags = photo.tags.map((obj) => obj.title);
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg">
-      <img src={photo.urls.regular} alt="" className="w-full" />
+      <img src={photo.urls.small} alt="" className="w-full" />
       <div className="px-6 py-4">
         <div className="font-bold text-teal-500 text-xl mb-2">
           Photo by {photo.user.name}

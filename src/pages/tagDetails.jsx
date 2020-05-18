@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import ImageTags from './../components/imageTags';
-import Images from './../components/images';
+import ImageTags from "./../components/imageTags";
+import Images from "./../components/images";
+import http from "../services/httpService";
+import { unsplashApi, client_Id } from "../config.json";
 
 class TagDetails extends Component {
   state = {
-    photo: [],
+    photos: [],
     photoTags: [
       "Covid-19",
       "Work From Home",
@@ -13,7 +15,6 @@ class TagDetails extends Component {
       "Wallpaper",
       "People",
       "Textures and Pattern",
-      "Technology",
       "Animals",
       "Travel",
       "Interiors",
@@ -29,21 +30,40 @@ class TagDetails extends Component {
       "Current Events",
     ],
   };
-//   handleTagClick = async (e) => {
-//     const Tagname = e.target.innerText;
-//     const { data } = await http.get(
-//       `${unsplashApi}?page=5&per_page=30&query=${Tagname}`,
-//       {
-//         headers: { Authorization: `Client-ID ${client_Id}` },
-//       }
-//     );
-//   }
+  async componentDidMount() {
+    const Tagname = this.props.location.state.photoTag
+    console.log(Tagname)
+    const { data } = await http.get(
+      `${unsplashApi}?page=5&per_page=30&query=${Tagname}`,
+      {
+        headers: { Authorization: `Client-ID ${client_Id}` },
+      }
+    );
+    const photos = data.results;
+    this.setState({photos})
+    
+  }
+  handleTagClick = async (e) => {
+    const Tagname = e.target.innerText;
+    console.log(Tagname)
+    const { data } = await http.get(
+      `${unsplashApi}?page=5&per_page=30&query=${Tagname}`,
+      {
+        headers: { Authorization: `Client-ID ${client_Id}` },
+      }
+    );
+
+    const photos = data.results;
+    this.setState({photos})
+  };
+
+
   render() {
     const { photos, photoTags } = this.state;
     return (
       <div>
-        <ImageTags photoTags={photoTags} />
-        <Images/>
+        <ImageTags photoTags={photoTags} onClick={this.handleTagClick} />
+        <Images photos={photos} />
       </div>
     );
   }
