@@ -7,6 +7,7 @@ import { unsplashApi, client_Id } from "../config.json";
 class TagDetails extends Component {
   state = {
     photos: [],
+    isLoading: true,
     photoTags: [
       "Covid-19",
       "Work From Home",
@@ -31,8 +32,8 @@ class TagDetails extends Component {
     ],
   };
   async componentDidMount() {
-    const Tagname = this.props.location.state.photoTag
-    console.log(Tagname)
+    const Tagname = this.props.location.state.photoTag;
+    console.log(Tagname);
     const { data } = await http.get(
       `${unsplashApi}?page=5&per_page=30&query=${Tagname}`,
       {
@@ -40,12 +41,11 @@ class TagDetails extends Component {
       }
     );
     const photos = data.results;
-    this.setState({photos})
-    
+    this.setState({ photos, isLoading:false });
   }
   handleTagClick = async (e) => {
     const Tagname = e.target.innerText;
-    console.log(Tagname)
+    console.log(Tagname);
     const { data } = await http.get(
       `${unsplashApi}?page=5&per_page=30&query=${Tagname}`,
       {
@@ -54,16 +54,23 @@ class TagDetails extends Component {
     );
 
     const photos = data.results;
-    this.setState({photos})
+    this.setState({ photos, isLoading:false });
   };
-
 
   render() {
     const { photos, photoTags } = this.state;
+    const { state: location } = this.props.location;
     return (
       <div>
-        <ImageTags photoTags={photoTags} onClick={this.handleTagClick} />
-        <Images photos={photos} />
+        <ImageTags
+          photoTags={photoTags}
+          onClick={this.handleTagClick}
+          location={location}
+        />
+         <h4 className="text-3xl text-center text-teal-500 mx-auto mt-8">Showing results for {location.photoTag}</h4>
+        <div className="mt-16">
+          <Images photos={photos} />
+        </div>
       </div>
     );
   }
