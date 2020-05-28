@@ -11,8 +11,8 @@ class App extends Component {
       <React.Fragment>
         <NavBar />
         <Switch>
-          <Route path="/" component={HomePage} />
           <Route path="/t/:tag" component={TagDetails} />
+          <Route path="/" component={HomePage} />
         </Switch>
       </React.Fragment>
     );
