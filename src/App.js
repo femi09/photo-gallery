@@ -5,6 +5,7 @@ import NavBar from "./components/navBar";
 import TagDetails from "./pages/tagDetails";
 import "./App.css";
 
+
 class App extends Component {
   render() {
     return (

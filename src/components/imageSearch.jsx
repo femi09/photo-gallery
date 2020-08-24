@@ -1,6 +1,6 @@
 import React from "react";
 
-const ImageSearch = ({onSubmit, onChange}) => {
+const ImageSearch = ({ onSubmit, onChange }) => {
   return (
     <div className="max-w-sm overflow-hidden my-10 mx-auto">
       <form onSubmit={onSubmit} className="w-full max-w-sm">
@@ -11,7 +11,10 @@ const ImageSearch = ({onSubmit, onChange}) => {
             onChange={onChange}
             placeholder="Search Photo..."
           />
-          <button type="submit" className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded">
+          <button
+            type="submit"
+            className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded outline-none focus:outline-none "
+          >
             Search
           </button>
         </div>
