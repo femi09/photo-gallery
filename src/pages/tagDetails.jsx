@@ -94,7 +94,7 @@ class TagDetails extends Component {
           location={location}
         />
         {/* <Login/> */}
-         <h4 className="text-3xl text-center text-teal-500 mx-auto mt-8">Showing results for {location.photoTag}</h4>
+        <h4 className="text-3xl text-center text-teal-500 mx-auto mt-8">Showing results for {location.photoTag}</h4>
         <div className="mt-16">
         <Images photos={photos} onClick={this.handleLoadMore} />
         </div>
