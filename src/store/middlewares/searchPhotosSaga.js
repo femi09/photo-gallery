@@ -1,21 +1,18 @@
-import { takeEvery, put, call, select } from "redux-saga/effects";
+import { takeEvery, put, call} from "redux-saga/effects";
 import { PHOTOS_SEARCH } from "../constants";
-import { setSearchedPhotos, setError } from "../actions";
+import { setSearchedPhotos, setSearchedError } from "../actions";
 import { fetchSearchPhotos } from "../../api";
 
-const getSearchTerm = (state) => state.searchTerm;
 
-export function* handlePhotoSearch() {
+export function* handlePhotoSearch({searchTerm}) {
   try {
-    const searchTerm = yield select(getSearchTerm);
+    console.log(searchTerm)
     const photos = yield call(fetchSearchPhotos, searchTerm);
-    console.log(photos);
     yield put(setSearchedPhotos(photos));
   } catch (error) {
-    yield put(setError(error.toString()));
+    yield put(setSearchedError(error.toString()));
   }
 }
-
 export default function* watchPhotoSearch() {
   yield takeEvery(PHOTOS_SEARCH, handlePhotoSearch);
 }

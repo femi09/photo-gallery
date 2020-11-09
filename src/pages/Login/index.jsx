@@ -5,7 +5,7 @@ import {
   redirect_uri,
   response_type,
   scope,
-} from "../config.json";
+} from "../../config.json";
 
 class Login extends Component {
   state = {

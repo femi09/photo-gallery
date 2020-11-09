@@ -1,19 +1,23 @@
 import { takeEvery, put, call, select } from "redux-saga/effects";
 import { LOAD_MORE_PHOTOS} from "../constants";
-import { setPhotos, setError } from "../actions";
+import { setLoadMorePhotos, setLoadMoreError } from "../actions";
 import { fetchMorePhotos } from "../../api";
-const getPage = (state) => state.page;
-const getSearchTerm = (state) => state.searchTerm;
+const getPage = ({images}) => images.page;
+const getSearchTerm = ({images}) => images.searchTerm;
+const getTagname =({images}) => images.tagname
 
 export function* handleLoadMore() {
   try {
     const page = yield select(getPage);
     const searchTerm = yield select(getSearchTerm);
-    const query = searchTerm ==="" ? "random" : searchTerm
+    const tagname = yield select(getTagname)
+    console.log(tagname)
+    const query = searchTerm ? searchTerm : tagname ? tagname : "editorial" 
+    console.log(query)
     const photos = yield call(fetchMorePhotos, query, page);
-    yield put(setPhotos(photos));
+    yield put(setLoadMorePhotos(photos));
   } catch (error) {
-    yield put(setError(error.toString()));
+    yield put(setLoadMoreError(error.toString()));
   }
 }
 

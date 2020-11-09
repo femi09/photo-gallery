@@ -1,11 +1,11 @@
-import React from "react";
-import ImageCard from "./imageCard";
+import React, {Fragment} from "react";
+import ImageCard from "./ImageCard";
 
-const Images = ({ photos, isLoading, loadMore }) => {
+const Images = ({ photos, loadMore }) => {
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="container mx-auto">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="mx-2 sm:mx-auto py-2 sm:grid sm:grid-cols-3 sm:gap-2">
           {photos.map((photo) => (
             <ImageCard key={photo.id} photo={photo} />
           ))}
@@ -23,7 +23,7 @@ const Images = ({ photos, isLoading, loadMore }) => {
         }
           
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

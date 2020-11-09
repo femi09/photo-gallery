@@ -1,9 +1,9 @@
 import React from "react";
 
-const NotFound = ({ searchTerm}) => {
+const NotFound = ({ searchTerm }) => {
   return (
     <div className="text-center">
-      <h1 className="text-6xl text-center mx-auto mt-32">
+      <h1 className="text-4xl sm:text-6xl text-center mx-auto mt-32">
         No Photos Found for {searchTerm}
       </h1>
      
