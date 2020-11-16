@@ -6,9 +6,16 @@ import NavBar from "./components/NavBar";
 import TagDetails from "./pages/TagDetails";
 import configureStore from "./store/configureStore";
 import "./App.css";
+import { getUser } from "./store/actions/auth";
+
 
 const store = configureStore();
 class App extends Component {
+  componentDidMount() {
+    if(localStorage.access_token){
+      store.dispatch(getUser(localStorage.access_token))
+    }
+  } 
   render() {
     return (
       <Provider store={store}>

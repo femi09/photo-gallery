@@ -3,7 +3,7 @@ import ImageTags from "../../components/NavBar/ImageTags";
 import Images from "../../components/Images";
 import ImagesSkeleton from "../../components/Skeletons/Images";
 import { connect } from "react-redux";
-import { loadClickedPhotoTags, loadMorePhotos } from "../../store/actions";
+import { loadClickedPhotoTags, loadMorePhotos } from "../../store/actions/photos";
 
 
 class TagDetails extends Component {

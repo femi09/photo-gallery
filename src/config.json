@@ -1,8 +1,11 @@
 {
-  "unsplashApi": "https://api.unsplash.com/search/photos",
-  "unsplashAuthApi": "https://unsplash.com/oauth/authorize",
+  "unsplashApi": "https://api.unsplash.com",
+  "unsplashPhotosApi": "https://api.unsplash.com/search/photos",
+  "unsplashAuthApi": "https://unsplash.com/oauth",
   "client_Id": "i-MziJcxj3BaybCrXFeJNx4knOnS6c-93rnEoPFbHLA",
-  "redirect_uri": "https://localhost:3000",
+  "client_secret": "JCxPxxyU86FHQc6MfHvJNrcBPeR72MctpvFa8o4BwrA",
+  "redirect_uri": "http://localhost:3000",
   "response_type": "code",
-  "scope": "public" 
+  "scope": "public+write_likes+read_user+write_user+read_photos+write_photos+write_followers+read_collections+write_collections"
+
 }

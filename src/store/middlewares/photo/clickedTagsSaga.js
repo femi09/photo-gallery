@@ -1,7 +1,7 @@
 import { takeEvery, put, call } from "redux-saga/effects";
-import { LOAD_CLICKED_PHOTOTAGS} from "../constants";
-import { setClickedPhotoTags, setClickedError } from "../actions";
-import { fetchSearchPhotos } from "../../api";
+import { LOAD_CLICKED_PHOTOTAGS} from "../../constants";
+import { setClickedPhotoTags, setClickedError } from "../../actions/photos";
+import { fetchSearchPhotos } from "../../../api/photo";
 
 export function* handlePhotoTagClick({tagname}) {
   try {

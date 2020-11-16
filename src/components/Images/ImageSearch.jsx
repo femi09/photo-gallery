@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
-import { searchPhoto } from "../../store/actions";
+import { searchPhoto } from "../../store/actions/photos";
 
 const input = ({ input:{onChange}, meta: { touched, error }, ...rest }) => (
   <Fragment>

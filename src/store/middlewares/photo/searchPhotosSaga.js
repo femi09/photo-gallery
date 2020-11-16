@@ -1,7 +1,7 @@
 import { takeEvery, put, call} from "redux-saga/effects";
-import { PHOTOS_SEARCH } from "../constants";
-import { setSearchedPhotos, setSearchedError } from "../actions";
-import { fetchSearchPhotos } from "../../api";
+import { PHOTOS_SEARCH } from "../../constants";
+import { setSearchedPhotos, setSearchedError } from "../../actions/photos";
+import { fetchSearchPhotos } from "../../../api/photo";
 
 
 export function* handlePhotoSearch({searchTerm}) {

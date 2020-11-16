@@ -1,7 +1,7 @@
 import { takeEvery, put, call, select } from "redux-saga/effects";
-import { setPhotos, setError } from "../actions";
-import { LOAD_PHOTOS } from "../constants";
-import { fetchRandomPhotos } from "../../api";
+import { setPhotos, setError } from "../../actions/photos";
+import { LOAD_PHOTOS } from "../../constants";
+import { fetchRandomPhotos } from "../../../api/photo";
 
 //worker Saga
 const getPage = (state) => state.page;
