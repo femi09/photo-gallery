@@ -5,7 +5,7 @@ const ImageCard = ({ photo }) => {
   // title properties of the tags array
   const tags = photo.tags.map((obj) => obj.title);
   return (
-    <div className="max-w-sm rounded overflow-auto shadow-lg">
+    <div className="my-4 sm:mb-0 sm:max-w-sm overflow-auto shadow-md sm:rounded">
       <img src={photo.urls.small} alt="" className="w-full" />
       <div className="px-6 py-4">
         <div className="font-bold text-teal-500 text-xl mb-2">
