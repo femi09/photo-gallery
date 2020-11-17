@@ -10,6 +10,13 @@ import {
   LOAD_MORE_PHOTOS_FAILURE,
   LOAD_CLICKED_PHOTOTAGS,
   LOAD_CLICKED_PHOTOTAGS_SUCCESS,
+  LIKE_PHOTO,
+  UNLIKE_PHOTO,
+  LIKE_PHOTO_SUCCESS,
+  UNLIKE_PHOTO_SUCCESS,
+  LIKE_PHOTO_FAILURE,
+  UNLIKE_PHOTO_FAILURE,
+  UPDATE_PHOTO
 } from "../constants";
 
 export const loadPhotos = () => ({
@@ -66,5 +73,42 @@ export const setClickedPhotoTags = (photos)=> ({
 })
 export const setClickedError = (error)=> ({
   type: LOAD_CLICKED_PHOTOTAGS_SUCCESS,
+  error
+})
+
+export const likePhoto = (photo_id, token) => ({
+  type: LIKE_PHOTO,
+  photo_id,
+  token
+})
+
+export const setLike = (photo) => ({
+  type: LIKE_PHOTO_SUCCESS,
+  photo
+})
+
+export const setLikeError = (error) => ({
+  type: LIKE_PHOTO_FAILURE,
+  error
+})
+
+export const unLikePhoto = (photo_id, token) => ({
+  type: UNLIKE_PHOTO,
+  photo_id,
+  token
+})
+
+export const updatePhoto = (photo_id) => ({
+  type:UPDATE_PHOTO,
+  photo_id
+})
+
+export const setUnlike = (photo) => ({
+  type: UNLIKE_PHOTO_SUCCESS,
+  photo
+})
+
+export const setUnlikeError = (error) => ({
+  type: UNLIKE_PHOTO_FAILURE,
   error
 })

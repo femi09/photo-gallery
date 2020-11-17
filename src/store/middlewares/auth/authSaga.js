@@ -4,6 +4,7 @@ import { GET_ACCESS_TOKEN } from "../../constants";
 import {
   storeAccessToken,
   setAccessTokenError,
+  getUser
 } from "../../actions/auth";
 
 export function* handleGetAccessToken({
@@ -15,7 +16,7 @@ export function* handleGetAccessToken({
   history
 }) {
   try {
-    const { access_token, refresh_token } = yield call(
+    const { access_token } = yield call(
       fetchAccessToken,
       client_Id,
       client_secret,
@@ -25,15 +26,14 @@ export function* handleGetAccessToken({
     );
 
     localStorage.setItem("access_token", access_token);
-    localStorage.setItem("refresh_token", refresh_token);
-    yield put(storeAccessToken(access_token, refresh_token));
-    history.push("/")
+    yield put(getUser(access_token))
+    yield put(storeAccessToken(access_token));
+    history.replace("/")
 
   } catch (error) {
     localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
     yield put(setAccessTokenError(error.toString()));
-    
+    history.replace("/")
   }
 }
 

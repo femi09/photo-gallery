@@ -25,10 +25,9 @@ export const getAccessToken = (
   history
 });
 
-export const storeAccessToken = (access_token, refresh_token) => ({
+export const storeAccessToken = (token) => ({
   type: GET_ACCESS_TOKEN_SUCCESS,
-  access_token,
-  refresh_token,
+  token,
 });
 
 export const setAccessTokenError = (error) => ({
@@ -48,6 +47,7 @@ export const setUser = (user) => ({
 
 export const setUserFailure = (error) => ({
   type: GET_USER_FAILURE,
+  error
 });
 
 export const logout = () => ({

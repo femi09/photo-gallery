@@ -4,44 +4,64 @@ import {
   GET_ACCESS_TOKEN_FAILURE,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
-  LOGOUT_USER
+  LOGOUT_USER,
+  GET_USER,
 } from "../constants";
 
 const initialState = {
   access_token: localStorage.getItem("access_token"),
-  refresh_token: localStorage.getItem("refresh_token"),
   isAuthenticated: false,
-  isLoading: true,
+  isLoading: false,
   user: null,
-  error: null
+  error: null,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ACCESS_TOKEN:
-      return { ...state, isAuthenticated: false, isLoading: true, user: null };
+    case GET_USER:
+      return {
+        ...state,
+        isLoading: true,
+        user: null,
+        error: null,
+      };
     case GET_ACCESS_TOKEN_SUCCESS:
+      return {
+        ...state,
+        access_token: action.token,
+        isAuthenticated: true,
+        isLoading: true,
+      };
     case GET_USER_SUCCESS:
       return {
         ...state,
+        user: action.user,
         isAuthenticated: true,
+        error: null,
         isLoading: false,
-        user: action.user
       };
+
     case GET_ACCESS_TOKEN_FAILURE:
-      case GET_USER_FAILURE:
+    case GET_USER_FAILURE:
+      localStorage.removeItem("access_token");
       return {
         ...state,
         isAuthenticated: false,
         user: null,
+        error: action.error,
+        isLoading: false
+      };
+
+    case LOGOUT_USER:
+      localStorage.removeItem("access_token");
+      return {
+        ...state,
         access_token: null,
         refresh_token: null,
-        error: action.error
+        isAuthenticated: false,
+        user: null,
       };
-      case LOGOUT_USER:
-        localStorage.removeItem("access_token")
-        localStorage.removeItem("refresh_token")
-        return { ...state, access_token: null, refresh_token: null, isAuthenticated: false, user:null}
     default:
       return state;
   }

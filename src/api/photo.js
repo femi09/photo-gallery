@@ -1,15 +1,15 @@
 import http from '../services/httpService'
-import { unsplashPhotosApi, client_Id } from "../config.json";
+import { unsplashApi, unsplashPhotosApi, client_Id } from "../config.json";
 
 
-export const fetchRandomPhotos = async (page, per_page) => {
-    const response = await http.get(
-        `${unsplashPhotosApi}?page=${page}&per_page=${per_page}&query=editorial&client_id=${client_Id}`
+export const fetchAllPhotos = async (page, per_page) => {
+    const {data, error }= await http.get(
+        `${unsplashApi}/photos?page=${page}&per_page=${per_page}&client_id=${client_Id}`
       );
-      if (response.status >= 400) {
-          throw new Error(response.error)
+      if (error) {
+          throw new Error(error)
       }
-      return response.data.results
+      return data
 }
 
 export const fetchSearchPhotos = async(searchTerm, page) => {
@@ -32,9 +32,9 @@ export const fetchMorePhotos = async(query, page) => {
         return response.data.results
 }
 
-export const fetchClickedTags = async(tagname) => {
+export const fetchClickedTags = async(tagname, page) => {
     const response = await  http.get(
-        `${unsplashPhotosApi}?page=5&per_page=5&query=${tagname}`,
+        `${unsplashPhotosApi}?page=${page}&per_page=5&query=${tagname}`,
         {
           headers: { Authorization: `Client-ID ${client_Id}` },
         }
@@ -45,4 +45,34 @@ export const fetchClickedTags = async(tagname) => {
     }
     return response.data.results
   
+}
+
+export const doLikePhoto = async (id, token) => {
+    const { data, error } = await http.post(`${unsplashApi}/photos/${id}/like`, {}, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if(error){
+        throw Error(error)
+      }
+      return data
+}
+
+export const doUnlikePhoto = async (id, token) => {
+    const { data, error } = await http.delete(`${unsplashApi}/photos/${id}/like`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if(error){
+        throw Error(error)
+      }
+      return data
+}
+
+export const updatePhoto = async (id, token) => {
+  const { data, error } = await http.put(`${unsplashApi}/photos/${id}/like`, {}, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if(error){
+      throw Error(error)
+    }
+    return data
 }
