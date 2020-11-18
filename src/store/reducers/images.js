@@ -17,6 +17,10 @@ import {
   LIKE_PHOTO_FAILURE,
   UNLIKE_PHOTO_SUCCESS,
   UNLIKE_PHOTO_FAILURE,
+  DOWNLOAD_PHOTO,
+  DOWNLOAD_PHOTO_FAILURE,
+  DOWNLOAD_PHOTO_SUCCESS
+
 } from "../constants";
 
 const initialState = {
@@ -25,9 +29,9 @@ const initialState = {
   searchTerm: "",
   isLoading: false,
   clicked: false,
-  page: Math.floor((Math.random() * 10) + 1),
+  page: Math.floor(Math.random() * 10 + 1),
   tagname: "",
-  liked: false,
+  photo_url: "",
 };
 
 const imagesReducer = (state = initialState, action) => {
@@ -117,10 +121,14 @@ const imagesReducer = (state = initialState, action) => {
         ),
         isLoading: false,
       };
+    case DOWNLOAD_PHOTO:
+      return { ...state, isLoading: true };
+    case DOWNLOAD_PHOTO_SUCCESS:
+      return { ...state, isLoading: false, photo_url: action.url };
     case LIKE_PHOTO_FAILURE:
     case UNLIKE_PHOTO_FAILURE:
+    case DOWNLOAD_PHOTO_FAILURE:
       return { ...state, error: action.error, isLoading: false };
-
     default:
       return state;
   }

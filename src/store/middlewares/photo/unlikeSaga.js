@@ -3,7 +3,7 @@ import { UNLIKE_PHOTO } from "../../constants";
 import {
   setUnlike,
   setUnlikeError,
-} from "../../actions/photos";
+} from "../../actions/write_photos";
 import { doUnlikePhoto } from "../../../api/photo";
 
 export function* handleUnlikePhoto({ photo_id, token }) {

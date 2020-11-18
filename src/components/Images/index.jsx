@@ -2,9 +2,21 @@ import React, { Fragment, useState } from "react";
 import ImageCard from "./ImageCard";
 import { connect } from "react-redux";
 import LoginWithUnsplash from "../Modal";
-import { likePhoto, unLikePhoto } from "../../store/actions/photos";
+import {
+  likePhoto,
+  unLikePhoto,
+  downloadPhoto,
+} from "../../store/actions/write_photos";
 
-const Images = ({ photos, loadMore, likePhoto, unLikePhoto, isAuthenticated }) => {
+const Images = ({
+  photos,
+  loadMore,
+  likePhoto,
+  unLikePhoto,
+  isAuthenticated,
+  downloadPhoto,
+  photo_url
+}) => {
   const [visible, setVisible] = useState(false);
   const token = localStorage.access_token;
 
@@ -14,6 +26,10 @@ const Images = ({ photos, loadMore, likePhoto, unLikePhoto, isAuthenticated }) =
 
   const closeModal = () => {
     setVisible(false);
+  };
+
+  const handleDownload = (photo_id) => {
+    downloadPhoto(photo_id);
   };
 
   const handleLikePhoto = (photo_id) => {
@@ -41,6 +57,8 @@ const Images = ({ photos, loadMore, likePhoto, unLikePhoto, isAuthenticated }) =
               photo={photo}
               handleLikePhoto={handleLikePhoto}
               handleUnlikePhoto={handleUnlikePhoto}
+              handleDownload={handleDownload}
+              photo_url={photo_url}
             />
           ))}
         </div>
@@ -59,13 +77,15 @@ const Images = ({ photos, loadMore, likePhoto, unLikePhoto, isAuthenticated }) =
   );
 };
 
-const mapStateToProps = ({ auth }) => ({
-  isAuthenticated: auth.isAuthenticated
+const mapStateToProps = ({ auth, images }) => ({
+  isAuthenticated: auth.isAuthenticated,
+  photo_url: images.photo_url
 });
 
 const mapDispatchToProps = (dispatch) => ({
   likePhoto: (token, photo_id) => dispatch(likePhoto(token, photo_id)),
   unLikePhoto: (token, photo_id) => dispatch(unLikePhoto(token, photo_id)),
+  downloadPhoto: (photo_id) => dispatch(downloadPhoto(photo_id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Images);

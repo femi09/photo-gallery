@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Dropdown = ({ user, logout }) => {
   const [show, setShow] = useState(false);
@@ -42,16 +43,17 @@ const Dropdown = ({ user, logout }) => {
           aria-orientation="vertical"
           aria-labelledby="options-menu"
         >
-          <div className="flex items-center py-1 px-2">
-            <img className="w-4 h-4" src="/assets/user.png" alt="" />
-            <a
-              href="#"
-              className="block px-2 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
-              role="menuitem"
-            >
-              view profile
-            </a>
-          </div>
+          <Link to="/profile">
+            <div className="flex items-center py-1 px-2">
+              <img className="w-4 h-4" src="/assets/user.png" alt="" />
+              <span
+                className="block px-2 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                role="menuitem"
+              >
+                view profile
+              </span>
+            </div>
+          </Link>
           <div className="border-t border-gray-100"></div>
           <div onClick={logout} className="flex items-center py-1 px-2">
             <img className="w-4 h-4" src="/assets/logout-2.png" alt="" />

@@ -3,6 +3,7 @@ import { LOAD_CLICKED_PHOTOTAGS} from "../../constants";
 import { setClickedPhotoTags, setClickedError } from "../../actions/photos";
 import { fetchSearchPhotos } from "../../../api/photo";
 const getPage = ({images}) => images.page;
+
 export function* handlePhotoTagClick({tagname}) {
   try {
     const page = yield select(getPage);

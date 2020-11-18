@@ -20,7 +20,7 @@ const TagDetails = ({
   useEffect(() => {
     const { photoTag: tagname } = state;
     loadPhotos(tagname);
-  }, [loadPhotos]);
+  }, [loadPhotos, state]);
 
   //To fetch images when you click a tag from another tag's page
   // handleLoadMore = async () => {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout, getUser } from "../../store/actions/auth";
+import { logout, getUser } from "../../store/actions/user";
 import {
   unsplashAuthApi,
   client_Id,
