@@ -43,8 +43,8 @@ const Dropdown = ({ user, logout }) => {
           aria-orientation="vertical"
           aria-labelledby="options-menu"
         >
-          <Link to="/profile">
-            <div className="flex items-center py-1 px-2">
+          <Link to={`/${user.username}`}>
+            <div onClick={() => setShow(!show)} className="flex items-center py-1 px-2">
               <img className="w-4 h-4" src="/assets/user.png" alt="" />
               <span
                 className="block px-2 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"

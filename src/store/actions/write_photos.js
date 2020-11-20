@@ -49,9 +49,10 @@ export const likePhoto = (photo_id, token) => ({
     error
   })
   
-  export const downloadPhoto = (photo_id) => ({
+  export const downloadPhoto = (photo_id, photo) => ({
     type: DOWNLOAD_PHOTO,
     photo_id,
+    photo
   })
   
   export const downloadSuccess = (url) => ({

@@ -7,6 +7,8 @@ import {
   unLikePhoto,
   downloadPhoto,
 } from "../../store/actions/write_photos";
+import MobileScreen from "./MobileScreen";
+import FileDownload from "js-file-download";
 
 const Images = ({
   photos,
@@ -15,7 +17,7 @@ const Images = ({
   unLikePhoto,
   isAuthenticated,
   downloadPhoto,
-  photo_url
+  photo_url,
 }) => {
   const [visible, setVisible] = useState(false);
   const token = localStorage.access_token;
@@ -30,6 +32,12 @@ const Images = ({
 
   const handleDownload = (photo_id) => {
     downloadPhoto(photo_id);
+  };
+
+  const handlePublicUser = () => {
+    if (!isAuthenticated) {
+      OpenModal();
+    }
   };
 
   const handleLikePhoto = (photo_id) => {
@@ -48,18 +56,28 @@ const Images = ({
   };
   return (
     <Fragment>
-      <div className="container mx-auto">
+      <div className="container py-2 mx-auto">
         {visible ? <LoginWithUnsplash closeModal={closeModal} /> : null}
-        <div className="mx-2 sm:mx-auto py-2 sm:grid sm:grid-cols-3 sm:gap-2">
+        <div className="mx-2 xl:mx-auto sm:grid sm:grid-flow-row-dense sm:grid-cols-3 sm:gap-4">
           {photos.map((photo) => (
-            <ImageCard
-              key={photo.id}
-              photo={photo}
-              handleLikePhoto={handleLikePhoto}
-              handleUnlikePhoto={handleUnlikePhoto}
-              handleDownload={handleDownload}
-              photo_url={photo_url}
-            />
+            <Fragment key={photo.id}>
+              <ImageCard
+                photo={photo}
+                handleLikePhoto={handleLikePhoto}
+                handleUnlikePhoto={handleUnlikePhoto}
+                handleDownload={handleDownload}
+                photo_url={photo_url}
+                handlePublicUser={handlePublicUser}
+              />
+              <MobileScreen
+                photo={photo}
+                handleLikePhoto={handleLikePhoto}
+                handleUnlikePhoto={handleUnlikePhoto}
+                handleDownload={handleDownload}
+                photo_url={photo_url}
+                handlePublicUser={handlePublicUser}
+              />
+            </Fragment>
           ))}
         </div>
         {photos.length !== 0 && (
@@ -79,7 +97,7 @@ const Images = ({
 
 const mapStateToProps = ({ auth, images }) => ({
   isAuthenticated: auth.isAuthenticated,
-  photo_url: images.photo_url
+  photo_url: images.photo_url,
 });
 
 const mapDispatchToProps = (dispatch) => ({
