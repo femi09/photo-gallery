@@ -1,18 +1,19 @@
 import { takeEvery, put, call, select } from "redux-saga/effects";
 import { setPhotos, setError } from "../../actions/photos";
 import { LOAD_PHOTOS } from "../../constants";
-import { fetchRandomPhotos } from "../../../api/photo";
+import { fetchAllPhotos } from "../../../api/photo";
 
 //worker Saga
-const getPage = (state) => state.page;
+const getPage = ({images}) => images.page;
 export function* handlePhotoFetch() {
   try {
     const page = yield select(getPage);
     const per_page = 5;
-    const photos = yield call(fetchRandomPhotos, page, per_page);
+    const photos = yield call(fetchAllPhotos, page, per_page);
     yield put(setPhotos(photos))
   } catch (error) {
     yield put(setError(error.toString()))
+    console.log(error.toString())
   }
 }
 

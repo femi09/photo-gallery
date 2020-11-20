@@ -1,4 +1,5 @@
 export const photoTags = [
+  "End SARS",
   "Covid-19",
   "Work From Home",
   "Technology",

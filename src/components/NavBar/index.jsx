@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout } from "../../store/actions/auth";
+import { logout, getUser } from "../../store/actions/user";
 import {
   unsplashAuthApi,
   client_Id,
@@ -9,8 +9,15 @@ import {
   response_type,
   scope,
 } from "../../config.json";
+import Dropdown from "./Dropdown";
 
-const NavBar = ({ isAuthenticated, logout, user }) => {
+const NavBar = ({ isAuthenticated, logout, getUser, user, isLoading }) => {
+  useEffect(() => {
+    if (localStorage.access_token) {
+      getUser(localStorage.access_token);
+    }
+  }, [getUser]);
+
   return (
     <React.Fragment>
       <nav className="flex justify-between bg-teal-500 p-6">
@@ -21,16 +28,20 @@ const NavBar = ({ isAuthenticated, logout, user }) => {
             </span>
           </div>
         </div>
-        <div className="bg-gray-200 cursor-pointer hover:bg-teal-800 text-white py-1 font-bold border-b-4 border-yellow-200 hover:border-b-500 rounded outline-none focus:outline-none">
-          {isAuthenticated && user ? (
-            <p onClick={logout} className="px-6 text-teal-500">logout</p>
-          ) : (
+        <div className="cursor-pointer text-white py-1 font-bold hover:border-b-500 rounded outline-none focus:outline-none">
+          {!isLoading && isAuthenticated && user ? (
+            <div className="px-4 sm:px-6">
+              <Dropdown user={user} logout={logout} />
+            </div>
+          ) : !isLoading && !isAuthenticated && !user ? (
             <a
               href={`${unsplashAuthApi}/authorize?client_id=${client_Id}&redirect_uri=${redirect_uri}&response_type=${response_type}&scope=${scope}`}
-              className="px-6 text-teal-500"
+              className="px-6"
             >
               Login
             </a>
+          ) : (
+            <div></div>
           )}
         </div>
       </nav>
@@ -41,10 +52,11 @@ const NavBar = ({ isAuthenticated, logout, user }) => {
 const mapStateToProps = ({ auth }) => ({
   isAuthenticated: auth.isAuthenticated,
   isLoading: auth.isLoading,
-  user: auth.user
+  user: auth.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  logout: (() => dispatch(logout()))
-})
+  logout: () => dispatch(logout()),
+  getUser: (token) => dispatch(getUser(token)),
+});
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

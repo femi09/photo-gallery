@@ -3,12 +3,12 @@ import Skeleton from "react-loading-skeleton";
 
 const ImageCardSkeleton = () => {
   return (
-    <div className="my-4 sm:mb-0 sm:max-w-sm overflow-auto shadow-md sm:rounded">
+    <div className="my-4 sm:mb-0 shadow-md sm:rounded">
       <div>
         <Skeleton height={300} width={`100%`} />
       </div>
       <div className="px-6 py-4">
-        <div className="font-bold text-teal-500 text-xl mb-2">
+        <div className="font-bold text-xl mb-2">
           <Skeleton width={`70%`} height={20} />
         </div>
         <div>

@@ -1,52 +1,27 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import MobileScreen from "./MobileScreen";
 
-const ImageCard = ({
+const MobileScreen = ({
   photo,
+  handlePublicUser,
   handleLikePhoto,
   handleUnlikePhoto,
-  handleDownload,
-  handlePublicUser,
+  handleDownload
 }) => {
-  const [show, setShow] = useState(false);
-
   return (
     <Fragment>
-      <div
-        className={`my-4 hidden sm:block relative row-span-${Math.ceil(
-          photo.height / photo.width
-        )} sm:my-0 sm:rounded`}
-        onMouseEnter={() => setShow(true)}
-        onMouseLeave={() => setShow(false)}
-      >
-        {/* Large Screen */}
-        <div
-          className={`${
-            show
-              ? "flex items-center text-sm absolute top-0 right-0 px-2 py-1 m-2 text-white bg-black bg-opacity-25"
-              : "hidden"
-          }`}
-        >
+      <div className="relative shadow-md sm:hidden">
+        <div className="flex items-center text-sm absolute top-0 right-0 px-2 py-1 m-2 text-white bg-black bg-opacity-25">
           <img className="w-4 h-4 mr-2" src="/assets/green-love.png" alt="" />
           <span>{photo.likes}</span>
         </div>
-
-        {/* PHOTO */}
         <img
           src={photo.urls.small}
           alt=""
-          className="hidden sm:block w-full h-full object-cover"
+          className="w-full h-full object-cover"
         />
 
-        <div
-          className={`${
-            show
-              ? "absolute bg-black bg-opacity-0 bottom-0 inset-x-0 flex justify-between px-2 py-2 items-center"
-              : "hidden"
-          }`}
-        >
-          {/* User- Large Screen */}
+        <div className="absolute bg-black bg-opacity-0 bottom-0 inset-x-0 flex justify-between px-2 py-2 items-center">
           <Link to={`/profile/${photo.user.username}`}>
             <div className="flex items-center" onClick={handlePublicUser}>
               <img
@@ -59,18 +34,13 @@ const ImageCard = ({
               </p>
             </div>
           </Link>
-
-          {/* Actions - Large Screen */}
-          <div
-            className="flex z-10"
-            onClick={() => handleDownload(photo.id)}
-          >
+          <div className="flex">
             <img
               className="my-2 mx-1 w-6 h-6 cursor-pointer"
               src="/assets/white-download.png"
               alt=""
+              onClick={() => handleDownload(photo.id)}
             />
-
             {photo.liked_by_user ? (
               <div
                 onClick={() => handleUnlikePhoto(photo.id)}
@@ -97,7 +67,35 @@ const ImageCard = ({
           </div>
         </div>
       </div>
+
+      <div className="sm:hidden shadow-md px-2 py-4 mb-4">
+        <div>
+          <span className="font-bold text-teal-500 text-md">
+            Photo by {photo.user.name}
+          </span>
+          <div className="py-2">
+            <p>
+              <strong className="text-teal-500">Description: </strong>
+              <span className="text-sm leading-loose text-gray-700 font-bold">
+                {photo.description}
+              </span>
+            </p>
+          </div>
+        </div>
+        <div className="my-2">
+          {photo.tags &&
+            photo.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="inline-block bg-gray-200 rounded-4 my-1 px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
+              >
+                {tag.title}
+              </span>
+            ))}
+        </div>
+      </div>
     </Fragment>
   );
 };
-export default ImageCard;
+
+export default MobileScreen;

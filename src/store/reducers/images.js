@@ -11,6 +11,24 @@ import {
   LOAD_CLICKED_PHOTOTAGS,
   LOAD_CLICKED_PHOTOTAGS_SUCCESS,
   LOAD_CLICKED_PHOTOTAGS_FAILURE,
+  LIKE_PHOTO,
+  UNLIKE_PHOTO,
+  LIKE_PHOTO_SUCCESS,
+  LIKE_PHOTO_FAILURE,
+  UNLIKE_PHOTO_SUCCESS,
+  UNLIKE_PHOTO_FAILURE,
+  DOWNLOAD_PHOTO,
+  DOWNLOAD_PHOTO_FAILURE,
+  DOWNLOAD_PHOTO_SUCCESS,
+  GET_USER_PHOTOS,
+  GET_USER_LIKED_PHOTOS,
+  GET_USER_LIKED_PHOTOS_SUCCESS,
+  GET_USER_LIKED_PHOTOS_FAILURE,
+  GET_USER_PHOTOS_SUCCESS,
+  GET_USER_PHOTOS_FAILURE,
+  GET_USER_COLLECTION,
+  GET_USER_COLLECTION_SUCCESS,
+  GET_USER_COLLECTION_FAILURE,
 } from "../constants";
 
 const initialState = {
@@ -19,17 +37,37 @@ const initialState = {
   searchTerm: "",
   isLoading: false,
   clicked: false,
-  page: 1,
-  tagname: ""
+  page: Math.floor(Math.random() * 10 + 1),
+  tagname: "",
+  photo_url: "",
 };
 
 const imagesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_USER_LIKED_PHOTOS:
+    case GET_USER_PHOTOS:
+    case GET_USER_COLLECTION:
     case LOAD_PHOTOS:
       return { ...state, isLoading: true };
     case LOAD_PHOTOS_SUCCESS:
-      return { ...state, photos: action.photos, error: null, isLoading: false, searchTerm: "", tagname: "" };
+    case GET_USER_PHOTOS_SUCCESS:
+    case GET_USER_LIKED_PHOTOS_SUCCESS:
+    case GET_USER_COLLECTION_SUCCESS:
+      return {
+        ...state,
+        photos: action.photos,
+        error: null,
+        isLoading: false,
+        searchTerm: "",
+        tagname: "",
+        photo_url:""
+      };
+    case GET_USER_COLLECTION_FAILURE:
+    case GET_USER_PHOTOS_FAILURE:
+    case GET_USER_LIKED_PHOTOS_FAILURE:
     case LOAD_PHOTOS_FAILURE:
+    case LOAD_MORE_PHOTOS_FAILURE:
+    case LOAD_CLICKED_PHOTOTAGS_FAILURE:
       return { ...state, error: action.error, isLoading: false };
     case PHOTOS_SEARCH:
       return {
@@ -56,13 +94,56 @@ const imagesReducer = (state = initialState, action) => {
         isLoading: false,
         error: null,
       };
-    case LOAD_MORE_PHOTOS_FAILURE:
-      return { ...state, error: action.error, isLoading: false };
     case LOAD_CLICKED_PHOTOTAGS:
-      return { ...state, isLoading: true, photos:[], tagname: action.tagname};
+      return { ...state, isLoading: true, photos: [], tagname: action.tagname };
     case LOAD_CLICKED_PHOTOTAGS_SUCCESS:
-      return { ...state, photos: action.photos, error: null, isLoading: false, searchTerm:""};
-    case LOAD_CLICKED_PHOTOTAGS_FAILURE:
+      return {
+        ...state,
+        photos: action.photos,
+        error: null,
+        isLoading: false,
+        searchTerm: "",
+      };
+    case LIKE_PHOTO:
+      return {
+        ...state,
+        photos: state.photos.map((photo) =>
+          photo.id === action.photo_id
+            ? { ...photo, liked_by_user: true, likes: photo.likes + 1 }
+            : photo
+        ),
+      };
+    case UNLIKE_PHOTO:
+      return {
+        ...state,
+        photos: state.photos.map((photo) =>
+          photo.id === action.photo_id
+            ? { ...photo, liked_by_user: false, likes: photo.likes - 1 }
+            : photo
+        ),
+      };
+    case LIKE_PHOTO_SUCCESS:
+    case UNLIKE_PHOTO_SUCCESS:
+      return {
+        ...state,
+        photos: state.photos.map((photo) =>
+          photo.id === action.photo.id
+            ? {
+                ...photo,
+                likes: action.photo.likes,
+                liked_by_user: action.photo.liked_by_user,
+              }
+            : photo
+        ),
+        isLoading: false,
+      };
+    case DOWNLOAD_PHOTO:
+      return { ...state, isLoading: true };
+    case DOWNLOAD_PHOTO_SUCCESS:
+      return { ...state, isLoading: false, photo_url: action.url };
+    case LIKE_PHOTO_FAILURE:
+    case UNLIKE_PHOTO_FAILURE:
+    case DOWNLOAD_PHOTO_FAILURE:
       return { ...state, error: action.error, isLoading: false };
     default:
       return state;

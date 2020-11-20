@@ -1,7 +1,7 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 import { GET_USER } from "../../constants";
 import { fetchUser } from "../../../api/auth";
-import { setUser, setUserFailure } from "../../actions/auth";
+import { setUser, setUserFailure } from "../../actions/user";
 
 export function* handleFetchUser({ token }) {
   try {

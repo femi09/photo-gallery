@@ -1,10 +1,8 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 import { fetchAccessToken } from "../../../api/auth";
 import { GET_ACCESS_TOKEN } from "../../constants";
-import {
-  storeAccessToken,
-  setAccessTokenError,
-} from "../../actions/auth";
+import { getUser } from "../../actions/user";
+import { storeAccessToken, setAccessTokenError } from "../../actions/auth";
 
 export function* handleGetAccessToken({
   client_Id,
@@ -12,10 +10,10 @@ export function* handleGetAccessToken({
   redirect_uri,
   code,
   grant_type,
-  history
+  history,
 }) {
   try {
-    const { access_token, refresh_token } = yield call(
+    const { access_token } = yield call(
       fetchAccessToken,
       client_Id,
       client_secret,
@@ -25,15 +23,13 @@ export function* handleGetAccessToken({
     );
 
     localStorage.setItem("access_token", access_token);
-    localStorage.setItem("refresh_token", refresh_token);
-    yield put(storeAccessToken(access_token, refresh_token));
-    history.push("/")
-
+    yield put(getUser(access_token));
+    yield put(storeAccessToken(access_token));
+    history.replace("/");
   } catch (error) {
     localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
     yield put(setAccessTokenError(error.toString()));
-    
+    history.replace("/");
   }
 }
 

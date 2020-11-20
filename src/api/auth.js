@@ -1,4 +1,4 @@
-import http from "../services/httpService";
+import spectrum from "../services/httpService";
 import { unsplashAuthApi, unsplashApi } from "../config.json";
 
 export const fetchAccessToken = async (
@@ -8,7 +8,7 @@ export const fetchAccessToken = async (
   code,
   grant_type
 ) => {
-  const { data, error } = await http.post(
+  const { data, error } = await spectrum.post(
     `${unsplashAuthApi}/token?client_id=${client_Id}&client_secret=${client_secret}&redirect_uri=${redirect_uri}&code=${code}&grant_type=${grant_type}`
   );
   if (error) {
@@ -18,11 +18,21 @@ export const fetchAccessToken = async (
 };
 
 export const fetchUser = async (token) => {
-  const { data, error } = await http.get(`${unsplashApi}/me`, {
+  const { data, error } = await spectrum.get(`${unsplashApi}/me`, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  if(error){
-    throw Error(error)
+  if (error) {
+    throw Error(error);
   }
-  return data
+  return data;
+};
+
+export const fetchPublicUser = async (username, token) => {
+  const { data, error } = await spectrum.get(`${unsplashApi}/users/${username}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (error) {
+    throw Error(error);
+  }
+  return data;
 };

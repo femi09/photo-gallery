@@ -2,10 +2,6 @@ import {
   GET_ACCESS_TOKEN,
   GET_ACCESS_TOKEN_SUCCESS,
   GET_ACCESS_TOKEN_FAILURE,
-  GET_USER,
-  GET_USER_FAILURE,
-  GET_USER_SUCCESS,
-  LOGOUT_USER
 } from "../constants";
 
 export const getAccessToken = (
@@ -25,10 +21,9 @@ export const getAccessToken = (
   history
 });
 
-export const storeAccessToken = (access_token, refresh_token) => ({
+export const storeAccessToken = (token) => ({
   type: GET_ACCESS_TOKEN_SUCCESS,
-  access_token,
-  refresh_token,
+  token,
 });
 
 export const setAccessTokenError = (error) => ({
@@ -36,20 +31,3 @@ export const setAccessTokenError = (error) => ({
   error,
 });
 
-export const getUser = (token) => ({
-  type: GET_USER,
-  token
-});
-
-export const setUser = (user) => ({
-  type: GET_USER_SUCCESS,
-  user,
-});
-
-export const setUserFailure = (error) => ({
-  type: GET_USER_FAILURE,
-});
-
-export const logout = () => ({
-  type: LOGOUT_USER
-})

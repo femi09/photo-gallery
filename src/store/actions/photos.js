@@ -68,3 +68,5 @@ export const setClickedError = (error)=> ({
   type: LOAD_CLICKED_PHOTOTAGS_SUCCESS,
   error
 })
+
+
