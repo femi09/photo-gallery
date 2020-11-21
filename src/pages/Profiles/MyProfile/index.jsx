@@ -19,12 +19,13 @@ const MyProfile = ({
   getUserCollection,
   photos,
   isLoading,
+  collections,
 }) => {
   const { username } = useParams();
   return (
     <Fragment>
-      {user && (
-        <div className="container mx-auto">
+      {user &&
+        <div className="sm:container sm:mx-auto py-8">
           <ProfileTop user={user} />
           <ProfileTab username={username} />
           <Switch>
@@ -58,7 +59,7 @@ const MyProfile = ({
                 <Collections
                   {...props}
                   isLoading={isLoading}
-                  photos={photos}
+                  collections={collections}
                   getUserCollection={getUserCollection}
                   username={username}
                 />
@@ -66,7 +67,7 @@ const MyProfile = ({
             />
           </Switch>
         </div>
-      )}
+      }
     </Fragment>
   );
 };
@@ -74,6 +75,7 @@ const mapStateToProps = ({ auth, images }) => ({
   user: auth.user,
   isLoading: images.isLoading,
   photos: images.photos,
+  collections: images.collections,
 });
 
 const mapDispatchToProps = (dispatch) => ({

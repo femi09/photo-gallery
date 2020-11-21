@@ -12,11 +12,11 @@ import {
 import Dropdown from "./Dropdown";
 
 const NavBar = ({ isAuthenticated, logout, getUser, user, isLoading }) => {
-  useEffect(() => {
-    if (localStorage.access_token) {
-      getUser(localStorage.access_token);
-    }
-  }, [getUser]);
+  // useEffect(() => {
+  //   if (localStorage.access_token) {
+  //     getUser(localStorage.access_token);
+  //   }
+  // }, [getUser]);
 
   return (
     <React.Fragment>

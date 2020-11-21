@@ -89,9 +89,9 @@ export const getUser = (token) => ({
     
   });
   
-  export const setUserCollection = (photos) => ({
+  export const setUserCollection = (collections) => ({
     type: GET_USER_COLLECTION_SUCCESS,
-    photos
+    collections
   });
   
   export const setUserCollectionFailure = (error) => ({

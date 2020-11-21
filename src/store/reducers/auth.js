@@ -30,7 +30,7 @@ const authReducer = (state = initialState, action) => {
         error: null,
       };
     case GET_PUBLIC_USER:
-      return { ...state, isLoading: true };
+      return { ...state, isLoading: true, error:null };
     case GET_ACCESS_TOKEN_SUCCESS:
       return {
         ...state,
@@ -43,7 +43,6 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.user,
-        isAuthenticated: true,
         error: null,
         isLoading: false,
       };
@@ -64,8 +63,15 @@ const authReducer = (state = initialState, action) => {
         error: action.error,
       };
 
-    case GET_ACCESS_TOKEN_FAILURE:
     case GET_USER_FAILURE:
+      return {
+        ...state,
+        user: null,
+        isLoading: false,
+        error: action.error
+      };
+
+    case GET_ACCESS_TOKEN_FAILURE:
       localStorage.removeItem("access_token");
       return {
         ...state,

@@ -6,9 +6,9 @@ const Photos = ({ username, getUserPhotos, photos, isLoading }) => {
     getUserPhotos(username, localStorage.access_token);
   }, [username, getUserPhotos]);
   return (
-    <div className="w-3/4 mx-auto bg-white">
-      {photos.length === 0 && !isLoading ? (
-        <h1 className="w-1/2 bg-teal-500 text-center my-4 mx-auto text-white font-bold p-2 shadow-sm">
+    <div className="mx-2 bg-white">
+      {!isLoading && photos.length === 0 ? (
+        <h1 className="sm:w-1/2 bg-teal-500 text-center my-4 mx-auto text-white font-bold py-1 sm:p-2 shadow-sm">
           No Photos for {username}
         </h1>
       ) : (

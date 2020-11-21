@@ -33,13 +33,13 @@ import {
 
 const initialState = {
   photos: [],
+  collections: [],
   error: null,
   searchTerm: "",
   isLoading: false,
   clicked: false,
   page: Math.floor(Math.random() * 10 + 1),
   tagname: "",
-  photo_url: "",
 };
 
 const imagesReducer = (state = initialState, action) => {
@@ -48,11 +48,10 @@ const imagesReducer = (state = initialState, action) => {
     case GET_USER_PHOTOS:
     case GET_USER_COLLECTION:
     case LOAD_PHOTOS:
-      return { ...state, isLoading: true };
+      return { ...state, isLoading: true, photos: [] };
     case LOAD_PHOTOS_SUCCESS:
     case GET_USER_PHOTOS_SUCCESS:
     case GET_USER_LIKED_PHOTOS_SUCCESS:
-    case GET_USER_COLLECTION_SUCCESS:
       return {
         ...state,
         photos: action.photos,
@@ -60,7 +59,14 @@ const imagesReducer = (state = initialState, action) => {
         isLoading: false,
         searchTerm: "",
         tagname: "",
-        photo_url:""
+      };
+    case GET_USER_COLLECTION_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        collections: action.collections,
+        searchTerm: "",
+        tagname: "",
       };
     case GET_USER_COLLECTION_FAILURE:
     case GET_USER_PHOTOS_FAILURE:
