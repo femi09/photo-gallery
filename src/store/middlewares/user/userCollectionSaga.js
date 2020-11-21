@@ -5,8 +5,8 @@ import { fetchUserCollection } from "../../../api/photo";
 
 export function* handleFetchUserCollection({ token, username }) {
   try {
-    const collection = yield call(fetchUserCollection, username, token);
-    yield put(setUserCollection(collection));
+    const collections = yield call(fetchUserCollection, username, token);
+    yield put(setUserCollection(collections));
   } catch (error) {
     yield put(setUserCollectionFailure(error.toString()));
   }

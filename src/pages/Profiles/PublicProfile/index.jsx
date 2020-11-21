@@ -20,6 +20,7 @@ const PublicProfile = ({
   getUserCollection,
   getPublicUser,
   photos,
+  collections,
   isLoading,
 }) => {
   const { username } = useParams();
@@ -28,8 +29,8 @@ const PublicProfile = ({
   }, [getPublicUser, username]);
   return (
     <Fragment>
-      {user && (
-        <div className="container mx-auto">
+      {user &&
+        <div className="container mx-auto py-8">
           <ProfileTop user={user} />
           <ProfileTab username={username} />
           <Switch>
@@ -63,7 +64,7 @@ const PublicProfile = ({
                 <Collections
                   {...props}
                   isLoading={isLoading}
-                  photos={photos}
+                  collections={collections}
                   getUserCollection={getUserCollection}
                   username={username}
                 />
@@ -71,7 +72,7 @@ const PublicProfile = ({
             />
           </Switch>
         </div>
-      )}
+      }
     </Fragment>
   );
 };
@@ -79,6 +80,7 @@ const mapStateToProps = ({ auth, images }) => ({
   user: auth.public_user,
   isLoading: images.isLoading,
   photos: images.photos,
+  collections: images.collections,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -87,8 +89,7 @@ const mapDispatchToProps = (dispatch) => ({
   getUserCollection: (username, token) =>
     dispatch(getUserCollection(username, token)),
   getUserPhotos: (username, token) => dispatch(getUserPhotos(username, token)),
-  getPublicUser: (username, token) =>
-    dispatch(getPublicUser(username, token)),
+  getPublicUser: (username, token) => dispatch(getPublicUser(username, token)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublicProfile);
