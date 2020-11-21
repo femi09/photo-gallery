@@ -1,6 +1,5 @@
-import { takeEvery, put, call } from "redux-saga/effects";
+import { takeEvery, call } from "redux-saga/effects";
 import { UPDATE_PHOTO } from "../../constants";
-import { updatePhoto } from "../../actions/write_photos";
 import { photoUpdate } from "../../../api/photo";
 
 export function* handlePhotoUpdate({ photo_id, token }) {

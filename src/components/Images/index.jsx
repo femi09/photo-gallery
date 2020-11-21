@@ -8,7 +8,6 @@ import {
   downloadPhoto,
 } from "../../store/actions/write_photos";
 import MobileScreen from "./MobileScreen";
-import FileDownload from "js-file-download";
 
 const Images = ({
   photos,

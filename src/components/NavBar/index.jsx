@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout, getUser } from "../../store/actions/user";
@@ -12,11 +12,6 @@ import {
 import Dropdown from "./Dropdown";
 
 const NavBar = ({ isAuthenticated, logout, getUser, user, isLoading }) => {
-  // useEffect(() => {
-  //   if (localStorage.access_token) {
-  //     getUser(localStorage.access_token);
-  //   }
-  // }, [getUser]);
 
   return (
     <React.Fragment>
