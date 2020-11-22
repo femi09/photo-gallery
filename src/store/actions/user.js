@@ -11,9 +11,6 @@ import {
     GET_USER_COLLECTION,
     GET_USER_COLLECTION_SUCCESS,
     GET_USER_COLLECTION_FAILURE,
-    GET_PUBLIC_USER,
-    GET_PUBLIC_USER_SUCCESS,
-    GET_PUBLIC_USER_FAILURE,
     LOGOUT_USER
   } from "../constants";
 
@@ -32,24 +29,7 @@ export const getUser = (token) => ({
     error
   });
 
-  export const getPublicUser = (username, token) => ({
-    type: GET_PUBLIC_USER,
-    username,
-    token
-  });
   
-  export const setPublicUser = (user) => ({
-    type: GET_PUBLIC_USER_SUCCESS,
-    user,
-  });
-  
-  export const setPublicUserFailure = (error) => ({
-    type: GET_PUBLIC_USER_FAILURE,
-    error
-  });
-
-
-
   export const getUserPhotos = (username, token) => ({
     type: GET_USER_PHOTOS,
     username,

@@ -11,8 +11,8 @@ import {
 } from "../../config.json";
 import Dropdown from "./Dropdown";
 
-const NavBar = ({ isAuthenticated, logout, getUser, user, isLoading }) => {
-
+const NavBar = ({ logout,  isLoading }) => {
+    let current_user = JSON.parse(localStorage.getItem("current_user"));
   return (
     <React.Fragment>
       <nav className="flex justify-between bg-teal-500 p-6">
@@ -24,11 +24,11 @@ const NavBar = ({ isAuthenticated, logout, getUser, user, isLoading }) => {
           </div>
         </div>
         <div className="cursor-pointer text-white py-1 font-bold hover:border-b-500 rounded outline-none focus:outline-none">
-          {!isLoading && isAuthenticated && user ? (
+          {!isLoading && current_user ? (
             <div className="px-4 sm:px-6">
-              <Dropdown user={user} logout={logout} />
+              <Dropdown user={current_user} logout={logout} />
             </div>
-          ) : !isLoading && !isAuthenticated && !user ? (
+          ) : !isLoading && !current_user ? (
             <a
               href={`${unsplashAuthApi}/authorize?client_id=${client_Id}&redirect_uri=${redirect_uri}&response_type=${response_type}&scope=${scope}`}
               className="px-6"
@@ -45,9 +45,7 @@ const NavBar = ({ isAuthenticated, logout, getUser, user, isLoading }) => {
 };
 
 const mapStateToProps = ({ auth }) => ({
-  isAuthenticated: auth.isAuthenticated,
   isLoading: auth.isLoading,
-  user: auth.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({

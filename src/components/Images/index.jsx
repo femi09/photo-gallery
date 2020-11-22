@@ -16,6 +16,7 @@ const Images = ({
   unLikePhoto,
   isAuthenticated,
   downloadPhoto,
+  isLoading,
   photo_url,
 }) => {
   const [visible, setVisible] = useState(false);
@@ -34,20 +35,20 @@ const Images = ({
   };
 
   const handlePublicUser = () => {
-    if (!isAuthenticated) {
+    if (!token) {
       OpenModal();
     }
   };
 
   const handleLikePhoto = (photo_id) => {
-    if (isAuthenticated) {
+    if (token) {
       likePhoto(photo_id, token);
     } else {
       OpenModal();
     }
   };
   const handleUnlikePhoto = (photo_id) => {
-    if (isAuthenticated) {
+    if (token) {
       unLikePhoto(photo_id, token);
     } else {
       OpenModal();
@@ -79,7 +80,7 @@ const Images = ({
             </Fragment>
           ))}
         </div>
-        {photos.length !== 0 && (
+        {!isLoading && photos.length !== 0 && (
           <div className="text-center my-16 items-center mx-auto">
             <button
               className="bg-teal-500 hover:bg-teal-800 text-white py-2 px-4 rounded outline-none focus:outline-none"
@@ -94,9 +95,9 @@ const Images = ({
   );
 };
 
-const mapStateToProps = ({ auth, images }) => ({
-  isAuthenticated: auth.isAuthenticated,
+const mapStateToProps = ({ images }) => ({
   photo_url: images.photo_url,
+  isLoading: images.isLoading
 });
 
 const mapDispatchToProps = (dispatch) => ({

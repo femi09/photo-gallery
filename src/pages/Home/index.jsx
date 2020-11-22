@@ -22,6 +22,7 @@ const HomePage = ({
   history,
   loadPhotos,
   loadClickedTag,
+  error,
 }) => {
   useEffect(() => {
     const { search } = location;
@@ -57,10 +58,12 @@ const HomePage = ({
             Showing results for {searchTerm}
           </h4>
         )}
-        {isLoading && photos.length === 0 ? (
+        {isLoading ? (
           <ImagesSkeleton />
-        ) : (
+        ) : !isLoading && photos ? (
           <Images photos={photos} isLoading={isLoading} loadMore={loadMore} />
+        ) : (
+          <div>{error}</div>
         )}
       </div>
     </div>
@@ -74,6 +77,7 @@ const mapStateToProps = ({ images, auth }) => ({
   clicked: images.clicked,
   isAuthenticated: auth.isAuthenticated,
   token: auth.access_token,
+  error: images.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({

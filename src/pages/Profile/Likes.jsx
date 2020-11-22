@@ -8,15 +8,12 @@ const Likes = ({ getLikedPhotos, username, photos, isLoading }) => {
   }, [username, getLikedPhotos]);
   return (
     <div className="mx-2 bg-white">
-      {photos.length === 0 && !isLoading ? (
+      {!isLoading && photos.length === 0 && (
         <h1 className="sm:w-1/2 bg-teal-500 text-center my-4 sm:mx-auto text-white font-bold py-1 sm:p-2 shadow-sm">
           You Haven't Liked Any Photos
         </h1>
-      ) : isLoading ? (
-        <ImagesSkeleton />
-      ) : (
-        <Images photos={photos} />
       )}
+      {isLoading ? <ImagesSkeleton /> : <Images photos={photos} />}
     </div>
   );
 };

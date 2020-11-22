@@ -9,7 +9,7 @@ import downloadSaga from "./photo/downloadSaga";
 import unlikeSaga from "./photo/unlikeSaga";
 import authSaga from "./auth/authSaga";
 import userSaga from "./user/userSaga";
-import publicUserSaga from "./user/publicUserSaga";
+import profileSaga from "./user/profileSaga";
 import likedPhotoSaga from "./user/likedPhotoSaga";
 import userPhotoSaga from "./user/userPhotoSaga";
 import userCollectionSaga from "./user/userCollectionSaga";
@@ -24,7 +24,7 @@ function* rootSaga() {
     clickedTagsSaga(),
     authSaga(),
     userSaga(),
-    publicUserSaga(),
+    profileSaga(),
     likeSaga(),
     unlikeSaga(),
     downloadSaga(),

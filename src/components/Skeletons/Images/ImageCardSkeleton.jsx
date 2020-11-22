@@ -7,7 +7,7 @@ const ImageCardSkeleton = () => {
       <div>
         <Skeleton height={300} width={`100%`} />
       </div>
-      <div className="px-6 py-4">
+      <div className="sm:hidden px-6 py-4">
         <div className="font-bold text-xl mb-2">
           <Skeleton width={`70%`} height={20} />
         </div>
@@ -28,7 +28,7 @@ const ImageCardSkeleton = () => {
           </div>
         </div>
       </div>
-      <div className="px-6 py-4">
+      <div className="sm:hidden px-6 py-4">
         {Array(3)
           .fill()
           .map((item, index) => (

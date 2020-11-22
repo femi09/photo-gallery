@@ -6,7 +6,7 @@ const MobileScreen = ({
   handlePublicUser,
   handleLikePhoto,
   handleUnlikePhoto,
-  handleDownload
+  handleDownload,
 }) => {
   return (
     <Fragment>
@@ -22,7 +22,7 @@ const MobileScreen = ({
         />
 
         <div className="absolute bg-black bg-opacity-0 bottom-0 inset-x-0 flex justify-between px-2 py-2 items-center">
-          <Link to={`/profile/${photo.user.username}`}>
+          <Link to={`/${photo.user.username}`}>
             <div className="flex items-center" onClick={handlePublicUser}>
               <img
                 className="w-8 h-8 rounded-full mr-2"

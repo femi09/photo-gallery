@@ -27,7 +27,7 @@ export const fetchUser = async (token) => {
   return data;
 };
 
-export const fetchPublicUser = async (username, token) => {
+export const fetchProfile = async (username, token) => {
   const { data, error } = await spectrum.get(`${unsplashApi}/users/${username}`, {
     headers: { Authorization: `Bearer ${token}` },
   });

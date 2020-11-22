@@ -6,17 +6,12 @@ import {
   GET_USER_FAILURE,
   LOGOUT_USER,
   GET_USER,
-  GET_PUBLIC_USER,
-  GET_PUBLIC_USER_SUCCESS,
-  GET_PUBLIC_USER_FAILURE,
 } from "../constants";
 
 const initialState = {
   access_token: localStorage.getItem("access_token"),
-  isAuthenticated: false,
+  user: JSON.parse(localStorage.getItem("current_user")),
   isLoading: false,
-  user: null,
-  public_user: null,
   error: null,
 };
 
@@ -29,8 +24,7 @@ const authReducer = (state = initialState, action) => {
         isLoading: true,
         error: null,
       };
-    case GET_PUBLIC_USER:
-      return { ...state, isLoading: true, error:null };
+   
     case GET_ACCESS_TOKEN_SUCCESS:
       return {
         ...state,
@@ -45,48 +39,33 @@ const authReducer = (state = initialState, action) => {
         user: action.user,
         error: null,
         isLoading: false,
+        isAuthenticated: true,
       };
 
-    case GET_PUBLIC_USER_SUCCESS:
-      return {
-        ...state,
-        public_user: action.user,
-        isLoading: false,
-        error: null,
-      };
-
-    case GET_PUBLIC_USER_FAILURE:
-      return {
-        ...state,
-        public_user: null,
-        isLoading: false,
-        error: action.error,
-      };
 
     case GET_USER_FAILURE:
       return {
         ...state,
         user: null,
         isLoading: false,
-        error: action.error
+        error: action.error,
       };
 
     case GET_ACCESS_TOKEN_FAILURE:
       localStorage.removeItem("access_token");
       return {
         ...state,
-        isAuthenticated: false,
         user: null,
         error: action.error,
         isLoading: false,
       };
 
     case LOGOUT_USER:
-      localStorage.removeItem("access_token");
+      localStorage.clear();
+      window.location.replace("/")
       return {
         ...state,
         access_token: null,
-        isAuthenticated: false,
         user: null,
       };
     default:

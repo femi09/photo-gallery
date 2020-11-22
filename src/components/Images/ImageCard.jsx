@@ -46,7 +46,7 @@ const ImageCard = ({
           }`}
         >
           {/* User- Large Screen */}
-          <Link to={`/profile/${photo.user.username}`}>
+          <Link to={`/${photo.user.username}`}>
             <div className="flex items-center" onClick={handlePublicUser}>
               <img
                 className="w-8 h-8 rounded-full mr-2"
@@ -62,12 +62,12 @@ const ImageCard = ({
           {/* Actions - Large Screen */}
           <div
             className="flex z-10"
-            onClick={() => handleDownload(photo.id)}
           >
             <img
               className="my-2 mx-1 w-6 h-6 cursor-pointer"
               src="/assets/white-download.png"
               alt=""
+              onClick={() => handleDownload(photo.id)}
             />
 
             {photo.liked_by_user ? (

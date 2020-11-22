@@ -15,6 +15,7 @@ const TagDetails = ({
   isLoading,
   loadMore,
   loadPhotos,
+  error,
 }) => {
   //fetching images on tag page mount
   useEffect(() => {
@@ -36,11 +37,11 @@ const TagDetails = ({
       )}
       {isLoading ? (
         <ImagesSkeleton />
-      ) : (
+      ) : !isLoading && photos ? (
         <div className="mt-4">
           <Images photos={photos} loadMore={loadMore} />
         </div>
-      )}
+      ): <div>{error}</div>}
     </div>
   );
 };
@@ -50,6 +51,7 @@ const mapStateToProps = ({ images }) => ({
   isLoading: images.isLoading,
   searchTerm: images.searchTerm,
   clicked: images.clicked,
+  error: images.error
 });
 
 const mapDispatchToProps = (dispatch) => ({

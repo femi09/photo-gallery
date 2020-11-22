@@ -6,6 +6,7 @@ import { setUser, setUserFailure } from "../../actions/user";
 export function* handleFetchUser({ token }) {
   try {
     const user = yield call(fetchUser, token);
+    localStorage.setItem("current_user", JSON.stringify(user));
     yield put(setUser(user));
   } catch (error) {
     yield put(setUserFailure(error.toString()));

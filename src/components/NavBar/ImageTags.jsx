@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { photoTags } from "../../utils";
+import { photoTags } from "../../utils/phototags";
 import { loadClickedPhotoTags } from "../../store/actions/photos";
 import { connect } from "react-redux";
 
