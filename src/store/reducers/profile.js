@@ -18,21 +18,23 @@ const initialState = {
   user_photos: [],
   collections: [],
   isLoading: true,
+  proloading: true,
   error: null,
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PROFILE:
+      return {...state, proloading: true, profile: null}
     case GET_USER_LIKED_PHOTOS:
     case GET_USER_PHOTOS:
-      return { ...state, isLoading: true };
+      return { ...state, isLoading: true};
 
     case GET_PROFILE_SUCCESS:
       return {
         ...state,
         profile: action.profile,
-        isLoading: false,
+        proloading: false,
         error: null,
       };
 
@@ -40,7 +42,7 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         profile: null,
-        isLoading: false,
+        proloading: false,
         error: action.error,
       };
 

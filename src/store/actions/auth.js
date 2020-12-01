@@ -5,16 +5,12 @@ import {
 } from "../constants";
 
 export const getAccessToken = (
-  client_Id,
-  client_secret,
   redirect_uri,
   code,
   grant_type,
   history
 ) => ({
   type: GET_ACCESS_TOKEN,
-  client_Id,
-  client_secret,
   redirect_uri,
   code,
   grant_type,

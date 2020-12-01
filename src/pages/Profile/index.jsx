@@ -28,7 +28,6 @@ const Profile = ({
   const { username } = useParams();
   useEffect(() => {
     getProfile(username, localStorage.access_token);
-    console.log("profile page");
   }, [getProfile, username]);
   return (
     <Fragment>
@@ -81,9 +80,9 @@ const Profile = ({
 const mapStateToProps = ({ auth, profile }) => ({
   profile: profile.profile,
   isLoading: profile.isLoading,
+  loading: profile.proloading,
   photos: profile.user_photos,
   collections: profile.collections,
-  loading: auth.isLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

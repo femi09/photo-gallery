@@ -14,7 +14,7 @@ const Photos = ({ username, getUserPhotos, photos, isLoading }) => {
         </h1>
       )}
 
-      {isLoading ? <ImagesSkeleton /> : <Images photos={photos} />}
+      {isLoading && photos.length === 0 ? <ImagesSkeleton /> : <Images photos={photos} />}
     </div>
   );
 };

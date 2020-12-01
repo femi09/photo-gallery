@@ -7,6 +7,7 @@ const MobileScreen = ({
   handleLikePhoto,
   handleUnlikePhoto,
   handleDownload,
+  token,
 }) => {
   return (
     <Fragment>
@@ -22,8 +23,11 @@ const MobileScreen = ({
         />
 
         <div className="absolute bg-black bg-opacity-0 bottom-0 inset-x-0 flex justify-between px-2 py-2 items-center">
-          <Link to={`/${photo.user.username}`}>
-            <div className="flex items-center" onClick={handlePublicUser}>
+          {!token ? (
+            <div
+              className="flex items-center cursor-pointer"
+              onClick={handlePublicUser}
+            >
               <img
                 className="w-8 h-8 rounded-full mr-2"
                 src={photo.user.profile_image.small}
@@ -33,7 +37,20 @@ const MobileScreen = ({
                 {photo.user.username}
               </p>
             </div>
-          </Link>
+          ) : (
+            <Link to={`/${photo.user.username}`}>
+              <div className="flex items-center" onClick={handlePublicUser}>
+                <img
+                  className="w-8 h-8 rounded-full mr-2"
+                  src={photo.user.profile_image.small}
+                  alt=""
+                />
+                <p className="text-xs font-bold text-white">
+                  {photo.user.username}
+                </p>
+              </div>
+            </Link>
+          )}
           <div className="flex">
             <img
               className="my-2 mx-1 w-6 h-6 cursor-pointer"

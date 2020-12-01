@@ -35,7 +35,7 @@ const initialState = {
 const imagesReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_PHOTOS:
-      return { ...state, isLoading: true, photos: [] };
+      return { ...state, isLoading: true};
     case LOAD_PHOTOS_SUCCESS:
       return {
         ...state,

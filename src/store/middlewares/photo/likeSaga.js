@@ -8,7 +8,6 @@ export function* handleLikePhoto({ photo_id, token }) {
     const { photo } = yield call(doLikePhoto, photo_id, token);
     yield put(setLike(photo));
     yield put(updatePhoto(photo.id, token))
-    console.log(photo.id)
   } catch (error) {
     yield put(setLikeError(error.toString()));
   }

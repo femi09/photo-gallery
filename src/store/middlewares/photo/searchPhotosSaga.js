@@ -6,7 +6,6 @@ import { fetchSearchPhotos } from "../../../api/photo";
 
 export function* handlePhotoSearch({searchTerm}) {
   try {
-    console.log(searchTerm)
     const photos = yield call(fetchSearchPhotos, searchTerm);
     yield put(setSearchedPhotos(photos));
   } catch (error) {

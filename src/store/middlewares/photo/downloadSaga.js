@@ -7,7 +7,6 @@ export function* handleDownloadPhoto({ photo_id, photo}) {
   try {
     const url = yield call(doPhotoDownload, photo_id, photo);
     yield put(downloadSuccess(url));
-    console.log(url)
   } catch (error) {
     yield put(downloadError(error.toString()));
   }

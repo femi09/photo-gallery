@@ -5,8 +5,6 @@ import { getUser } from "../../actions/user";
 import { storeAccessToken, setAccessTokenError } from "../../actions/auth";
 
 export function* handleGetAccessToken({
-  client_Id,
-  client_secret,
   redirect_uri,
   code,
   grant_type,
@@ -15,8 +13,6 @@ export function* handleGetAccessToken({
   try {
     const { access_token } = yield call(
       fetchAccessToken,
-      client_Id,
-      client_secret,
       redirect_uri,
       code,
       grant_type

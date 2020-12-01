@@ -16,7 +16,7 @@ const input = ({ input:{onChange}, meta: { touched, error }, ...rest }) => (
   </Fragment>
 );
 
-const ImageForm = ({ handleSubmit, searchPhoto, value, onChange }) => {
+const ImageForm = ({ handleSubmit, searchPhoto, value}) => {
   return (
     <div className="w-2/3 sm:max-w-sm sm:overflow-hidden my-10 mx-auto">
       <form

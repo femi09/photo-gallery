@@ -14,7 +14,6 @@ const Images = ({
   loadMore,
   likePhoto,
   unLikePhoto,
-  isAuthenticated,
   downloadPhoto,
   isLoading,
   photo_url,
@@ -68,6 +67,7 @@ const Images = ({
                 handleDownload={handleDownload}
                 photo_url={photo_url}
                 handlePublicUser={handlePublicUser}
+                token={token}
               />
               <MobileScreen
                 photo={photo}
@@ -76,6 +76,7 @@ const Images = ({
                 handleDownload={handleDownload}
                 photo_url={photo_url}
                 handlePublicUser={handlePublicUser}
+                token={token}
               />
             </Fragment>
           ))}

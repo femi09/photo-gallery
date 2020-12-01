@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import queryString from "query-string";
 import { connect } from "react-redux";
-import { client_Id, client_secret, redirect_uri } from "../../config.json";
+import { redirect_uri } from "../../config.json";
 import Images from "../../components/Images";
 import ImagesSkeleton from "../../components/Skeletons/Images";
 import ImageTags from "../../components/NavBar/ImageTags";
@@ -29,14 +29,7 @@ const HomePage = ({
     if (search) {
       const { code } = queryString.parse(search);
       const grant_type = "authorization_code";
-      getAccessToken(
-        client_Id,
-        client_secret,
-        redirect_uri,
-        code,
-        grant_type,
-        history
-      );
+      getAccessToken(redirect_uri, code, grant_type, history);
     }
     loadPhotos();
   }, [getAccessToken, loadPhotos, history, location]);
@@ -84,24 +77,8 @@ const mapDispatchToProps = (dispatch) => ({
   loadPhotos: () => dispatch(loadPhotos()),
   loadMore: () => dispatch(loadMorePhotos()),
   loadClickedTag: (tagname) => dispatch(loadClickedPhotoTags(tagname)),
-  getAccessToken: (
-    client_Id,
-    client_secret,
-    redirect_uri,
-    code,
-    grant_type,
-    history
-  ) =>
-    dispatch(
-      getAccessToken(
-        client_Id,
-        client_secret,
-        redirect_uri,
-        code,
-        grant_type,
-        history
-      )
-    ),
+  getAccessToken: (redirect_uri, code, grant_type, history) =>
+    dispatch(getAccessToken(redirect_uri, code, grant_type, history)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -11,7 +11,6 @@ export function* handleLoadMore() {
     const page = yield select(getPage);
     const searchTerm = yield select(getSearchTerm);
     const tagname = yield select(getTagname)
-    console.log(tagname)
     const query = searchTerm ? searchTerm : tagname ? tagname : "editorial" 
     const photos = yield call(fetchMorePhotos, query, page);
     yield put(setLoadMorePhotos(photos));

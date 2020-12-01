@@ -7,6 +7,7 @@ const ImageCard = ({
   handleUnlikePhoto,
   handleDownload,
   handlePublicUser,
+  token
 }) => {
   const [show, setShow] = useState(false);
 
@@ -46,8 +47,8 @@ const ImageCard = ({
           }`}
         >
           {/* User- Large Screen */}
-          <Link to={`/${photo.user.username}`}>
-            <div className="flex items-center" onClick={handlePublicUser}>
+          {!token ? (
+            <div className="flex items-center cursor-pointer" onClick={handlePublicUser}>
               <img
                 className="w-8 h-8 rounded-full mr-2"
                 src={photo.user.profile_image.small}
@@ -57,12 +58,23 @@ const ImageCard = ({
                 {photo.user.username}
               </p>
             </div>
-          </Link>
+          ) : (
+            <Link to={`/${photo.user.username}`}>
+              <div className="flex items-center" onClick={handlePublicUser}>
+                <img
+                  className="w-8 h-8 rounded-full mr-2"
+                  src={photo.user.profile_image.small}
+                  alt=""
+                />
+                <p className="text-xs font-bold text-white">
+                  {photo.user.username}
+                </p>
+              </div>
+            </Link>
+          )}
 
           {/* Actions - Large Screen */}
-          <div
-            className="flex z-10"
-          >
+          <div className="flex z-10">
             <img
               className="my-2 mx-1 w-6 h-6 cursor-pointer"
               src="/assets/white-download.png"

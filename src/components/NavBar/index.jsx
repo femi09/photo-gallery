@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { logout, getUser } from "../../store/actions/user";
 import {
   unsplashAuthApi,
-  client_Id,
   redirect_uri,
   response_type,
   scope,
@@ -30,7 +29,7 @@ const NavBar = ({ logout,  isLoading }) => {
             </div>
           ) : !isLoading && !current_user ? (
             <a
-              href={`${unsplashAuthApi}/authorize?client_id=${client_Id}&redirect_uri=${redirect_uri}&response_type=${response_type}&scope=${scope}`}
+              href={`${unsplashAuthApi}/authorize?client_id=${process.env.REACT_APP_UNSPLASH_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=${response_type}&scope=${scope}`}
               className="px-6"
             >
               Login
