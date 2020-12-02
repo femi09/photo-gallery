@@ -17,7 +17,7 @@ export const fetchSearchPhotos = async (searchTerm, page) => {
     data,
     error,
   } = await spectrum.get(
-    `${unsplashPhotosApi}?page=${page}&per_page=5&query=${searchTerm}`,
+    `${unsplashPhotosApi}?page=${page}&per_page=30&query=${searchTerm}`,
     { headers: { Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_CLIENT_ID}` } }
   );
   if (error) {
@@ -31,7 +31,7 @@ export const fetchMorePhotos = async (query, page) => {
     data,
     error,
   } = await spectrum.get(
-    `${unsplashPhotosApi}?page=${page}&per_page=5&query=${query}`,
+    `${unsplashPhotosApi}?page=${page}&per_page=30&query=${query}`,
     { headers: { Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_CLIENT_ID}` } }
   );
   if (error) {
@@ -42,7 +42,7 @@ export const fetchMorePhotos = async (query, page) => {
 
 export const fetchClickedTags = async (tagname, page) => {
   const { data, error } = await spectrum.get(
-    `${unsplashPhotosApi}?page=${page}&per_page=5&query=${tagname}`,
+    `${unsplashPhotosApi}?page=${page}&per_page=30&query=${tagname}`,
     {
       headers: { Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_CLIENT_ID}` },
     }

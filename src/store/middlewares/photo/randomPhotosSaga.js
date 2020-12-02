@@ -3,12 +3,12 @@ import { setPhotos, setError } from "../../actions/photos";
 import { LOAD_PHOTOS } from "../../constants";
 import { fetchAllPhotos } from "../../../api/photo";
 
-//worker Saga
+// worker Saga
 const getPage = ({images}) => images.page;
 export function* handlePhotoFetch() {
   try {
     const page = yield select(getPage);
-    const per_page = 5;
+    const per_page = 30;
     const photos = yield call(fetchAllPhotos, page, per_page);
     yield put(setPhotos(photos))
   } catch (error) {
@@ -17,7 +17,7 @@ export function* handlePhotoFetch() {
   }
 }
 
-//watcher Saga
+// watcher Saga
 
 export default function* watchPhotosFetch() {
   yield takeEvery(LOAD_PHOTOS, handlePhotoFetch);
