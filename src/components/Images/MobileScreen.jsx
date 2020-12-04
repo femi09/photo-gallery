@@ -52,7 +52,7 @@ const MobileScreen = ({
             </Link>
           )}
           <div className="flex">
-            <a href={photo.urls.full} download={`photo-${photo.id}`}>
+            <a href={photo.urls.small} download={`photo-${photo.id}`}>
               <img
                 className="my-2 mx-1 w-6 h-6 cursor-pointer"
                 src="/assets/white-download.png"
