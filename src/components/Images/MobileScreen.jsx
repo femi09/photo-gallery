@@ -53,7 +53,7 @@ const MobileScreen = ({
           )}
           <div className="flex">
             <a
-              href={`https://source.unsplash.com/${photo.id}`}
+              href={photo.urls.raw}
               target="_blank"
               rel="noopener noreferrer"
               download={`photo-${photo.id}`}
