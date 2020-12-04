@@ -52,12 +52,15 @@ const MobileScreen = ({
             </Link>
           )}
           <div className="flex">
-            <img
-              className="my-2 mx-1 w-6 h-6 cursor-pointer"
-              src="/assets/white-download.png"
-              alt=""
-              onClick={() => handleDownload(photo.id)}
-            />
+            <a href={photo.urls.full} download={`photo-${photo.id}`}>
+              <img
+                className="my-2 mx-1 w-6 h-6 cursor-pointer"
+                src="/assets/white-download.png"
+                alt=""
+                onClick={() => handleDownload(photo.id)}
+              />
+            </a>
+
             {photo.liked_by_user ? (
               <div
                 onClick={() => handleUnlikePhoto(photo.id)}
